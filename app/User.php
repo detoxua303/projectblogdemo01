@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\Photo;
+use App\Post;
 
 class User extends Authenticatable
 {
@@ -34,5 +35,17 @@ class User extends Authenticatable
     }
     public function photo(){
         return $this->belongsTo('App\Photo');
+    }
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+    public function isAdmin()
+    {
+        if($this->role->name == "Administrator" && $this->status == 1)
+        {
+           return true;
+        }
+        return false;
     }
 }

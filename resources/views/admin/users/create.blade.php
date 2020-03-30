@@ -1,4 +1,4 @@
-<!--blog\resources\views\admin\users\index.blade.php-->
+<!--blog\resources\views\admin\users\create.blade.php-->
 @extends('layouts.admin')
 @section('content')
 	<div><h3>Create Admin</h3></div>

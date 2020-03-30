@@ -19,24 +19,47 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+/*
+|--------------------------------------------------------------------------
+| To dcheck whether middleware logic(isAdmin) is working or not
+|--------------------------------------------------------------------------
+*/
+//Route::get('/middleware', function () {
+//   	$user = Auth::user();
+//    if($user->isAdmin()){
+//    	echo "Admin";
+//    }
+//
+//});
 /*
 |--------------------------------------------------------------------------
 | To display the users of role id 2 (i.e role: user)
 |--------------------------------------------------------------------------
 */
-Route::get('/roles', function(){
+//Route::get('/roles', function(){
 
-	$users = App\Role::find(2)->user;
-	foreach ($users as $user)
-	{
-		echo $user->name;
-	}
-});
-
+//	$users = App\Role::find(2)->user;
+//	foreach ($users as $user)
+//	{
+//		echo $user->name;
+//	}
+//});
 /*
 |--------------------------------------------------------------------------
 | AdminUsersCRUD Route
 |--------------------------------------------------------------------------
 */
-Route::resource('/admin/users','AdminUserController');
+Route::group(['middleware'=>'admin'], function(){
+
+	Route::resource('admin/users','AdminUserController');
+
+	Route::get('/admin', function () {
+		return view('admin.index');
+	});
+
+	Route::resource('admin/posts','AdminPostsController');
+
+});
+
+
+

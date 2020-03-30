@@ -50,11 +50,12 @@
 
         <ul class="nav navbar-top-links navbar-right">
 
-
-            <!-- /.dropdown -->
+            <!-- /.dropdown-->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> 
+                    {{{ isset(Auth::user()->name) ? Auth::user()->name : 'Hacker Detected' }}} 
+                    <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -65,10 +66,19 @@
                     <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
-                <!-- /.dropdown-user -->
+                
             </li>
-            <!-- /.dropdown -->
-
+            <li>
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </li>
+            <!--dropdown -->
 
         </ul>
 
@@ -123,11 +133,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ url('/admin/users/') }}">All Users</a>
+                                <a href="{{ route('users.index') }}">All Users</a>
                             </li>
 
                             <li>
-                                <a href="{{ url('/admin/users/create') }}">Create User</a>
+                                <a href="{{ route('users.create') }}">Create User</a>
                             </li>
 
                         </ul>
@@ -138,11 +148,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{ route('posts.index') }}">All Posts</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{ route('posts.create') }}">Create Post</a>
                             </li>
 
                         </ul>
