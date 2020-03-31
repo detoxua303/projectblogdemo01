@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Photo;
-//use App\Category;
+use App\Category;
 
 class Post extends Model
 {
@@ -22,9 +22,8 @@ class Post extends Model
     {
     	return $this->belongsTo('App\Photo');
     }
-    /*
     public function category()
     {
     	return $this->belongsTo('App\Category');
-    }*/
+    }
 }

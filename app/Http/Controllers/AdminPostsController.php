@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Post;
 use App\User;
 use App\Photo;
+use App\Category;
 use Auth;
 
 class AdminPostsController extends Controller
@@ -33,7 +34,8 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        return view('admin.posts.create');
+        $categories = Category::pluck('name','id')->all();
+        return view('admin.posts.create',compact('categories'));
     }
 
     /**
@@ -89,8 +91,9 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $categories = Category::pluck('name','id')->all();
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post','categories'));
     }
 
     /**
@@ -103,6 +106,7 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return $request->all();   
     }
 
     /**

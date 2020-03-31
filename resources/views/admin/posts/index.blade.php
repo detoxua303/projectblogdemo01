@@ -33,7 +33,7 @@
 							<td>{{$count = $count+1}}</td>
 							<td>{{$post->id}}</td>
 							<td>{{$post->user->name}}</td>
-							<td>{{$post->category_id}}</td>
+							<td>{{$post->category_id==0 ? 'Uncategorized' : $post->category->name }}</td>
 							<td>{{$post->title}}</td>
 							<td colspan="2">{{$post->body}}</td>
 							<td>{{$post->created_at->diffForHumans()}}</td>
